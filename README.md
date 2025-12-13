@@ -43,6 +43,8 @@ LibroAI stands out because it focuses on the **complete learning cycle**:
 - **Distraction-Free UX**: The interface is designed as a "focused study space" (Study Desk metaphor) to minimize cognitive load.
 - **Instant Feeback**: Users get immediate feedback on their quiz answers, reinforcing learning.
 
+**Real-world Example**: When a student needs to quicky revise before an exam, they often prioritize summaries to cover material fast. LibroAI serves this exact need by instantly providing summaries and active recall tools, making it an essential companion for last-minute revision.
+
 ## 4. LibroAI Usage
 1.  **Launch the Application**: Open the web interface.
 2.  **Input Material**:
@@ -99,3 +101,7 @@ For developers picking up this project:
       "mcqs": [ {"question": "...", "options": [...], "answer": "..."} ]
     }
     ```
+
+## 8. Project Resources
+- [Project Presentation (PPT)](https://docs.google.com/presentation/d/1Z_HSiPL_L2GVMVdzOd1ycwW2tzLOHy9Q/edit?usp=sharing&ouid=106553524286109498561&rtpof=true&sd=true)
+- [Poster Design](https://www.canva.com/design/DAG7UWsXMKA/Xq1xBNO82XqdwpIeK86iHA/edit?utm_content=DAG7UWsXMKA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
