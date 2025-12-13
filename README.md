@@ -15,25 +15,39 @@ The project follows a standard modern web application structure, separating the 
 ```
 TEAM-79/
 ├── frontend/                # React + Vite Frontend Application
-│   ├── public/              # Static assets
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── node_modules/        # (ignored)
+│   ├── package-lock.json    # (ignored)
+│   ├── package.json
+│   ├── public/              # Static assets (e.g., vite.svg)
+│   ├── README.md
 │   ├── src/
+│   │   ├── App.css
+│   │   ├── App.jsx          # Main application component & logic (UI, recording, form submission)
 │   │   ├── assets/          # Images and icons
-│   │   ├── App.jsx          # Main application component & Logic
-│   │   ├── App.css          # Application styles
-│   │   ├── main.jsx         # Entry point
-│   │   └── index.css        # Global styles
-│   ├── index.html           # HTML template
-│   ├── package.json         # Frontend dependencies
+│   │   ├── index.css
+│   │   └── main.jsx         # Entry point
 │   └── vite.config.js       # Vite configuration
 ├── backend/                 # Backend API (Node.js + Express)
-│   ├── src/
-│   │   ├── app.js           # Main Express application
-│   │   ├── routes.js        # API routes
-│   │   └── services.js      # LLM & File processing logic
-│   └── package.json         # Backend dependencies
+│   ├── .env.example         # Example env file (do NOT commit real keys)
+│   ├── package.json
+│   ├── server.js            # Legacy / convenience script (optional)
+│   └── src/
+│       ├── app.js           # Main Express application (Express setup & routes)
+│       ├── config.js        # Env/config loader
+│       ├── routes/
+│       │   └── api.js       # API route definitions
+│       ├── controllers/     # Request handling & orchestration
+│       │   ├── apiController.js
+│       │   ├── ingestController.js
+│       │   └── queryController.js
+│       └── services/        # LLM, embeddings, and vector DB helpers
+│           ├── geminiService.js
+│           └── vectorStore.js
 ├── GUIDELINES.md            # Hackathon guidelines
 ├── README.md                # Project documentation (This file)
-└── .gitignore               # Git ignore rules
 ```
 
 ## 3. Why LibroAI
