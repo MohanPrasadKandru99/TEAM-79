@@ -1,13 +1,30 @@
-# Environment & Secrets (backend) 🔒
+# Backend environment & key rotation (quick guide)
 
-This project reads configuration from a `.env` file in the `backend/` folder.
+If your backend logs show errors like "API key expired" or "API_KEY_INVALID" from the Generative Language API, follow these steps:
 
-Important steps to follow when a secret is leaked or when setting up locally:
+1. Rotate / renew the API key in Google Cloud Console
+   - Open Google Cloud Console → APIs & Services → Credentials
+   - Delete or restrict the compromised API key
+   - Create a **new** API key (or appropriate credential) and copy it
 
-- **Rotate compromised keys immediately:** If any key (e.g. `GEMINI_API_KEY`) is compromised, revoke it in the Google Cloud Console and create a new key.
-- **Do not commit `.env` to Git:** An example file, `.env.example`, is provided. Copy it to `.env` and fill in your real keys locally.
-- **Remove leaked secrets from the repository history:** Deleting `.env` and committing the removal prevents future commits from re-introducing it, but the key may still be in the git history. Use tools like `bfg` or `git filter-repo` to purge secrets from history. Example: `bfg --delete-files .env` followed by `git reflog expire --expire=now --all && git gc --prune=now --aggressive`.
-- **Restart the backend after updating `.env`:** `cd backend && npm start` or in dev mode: `npm run dev`.
-- **Check that the key is loaded:** The backend logs an appropriate error message if `GEMINI_API_KEY` is missing or invalid.
+2. Update your local `.env`
+   - Copy `.env.example` to `.env` if you don't already have one
+   - Replace `GEMINI_API_KEY` with the newly created key
+     ```env
+     GEMINI_API_KEY=YOUR_NEW_KEY_HERE
+     ```
 
-If you want, I can walk you through revoking and reissuing the key in the Google Cloud Console and scrub the repo history for the leaked secret (requires GPG credentials and care because rewriting history affects collaborators).
+3. Restart the backend
+   ```powershell
+   cd backend
+   npm start
+   ```
+
+4. Verify functionality
+   - Send a quick test POST to `/api/generate` with a short text payload.
+   - If you still see errors, check whether the key has API restrictions (IP/referrer), whether the Generative API is enabled in the project, and whether quotas/billing are configured.
+
+5. Remove leaked secrets from repo history (optional but recommended)
+   - Deleting `.env` from the repo prevents future commits, but the old key can remain in git history. Use `bfg` or `git filter-repo` to scrub if needed (coordinate with collaborators as this rewrites history).
+
+If you'd like, I can help test a new key locally or guide you through the Google Cloud steps.

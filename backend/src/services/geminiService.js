@@ -16,9 +16,13 @@ export const geminiService = {
             return result.embedding.values;
         } catch (error) {
             console.error('Error generating embedding:', error);
-            // Re-throw with a clearer, actionable message for common 403 cases
-            if (error && error.message && error.message.includes('403')) {
+            // Map common API errors to actionable messages
+            const msg = (error && (error.message || JSON.stringify(error))) || '';
+            if (msg.includes('403') || msg.includes('Forbidden')) {
                 throw new Error('Google Generative API returned 403 Forbidden. The API key may be invalid or revoked. Rotate the key and update GEMINI_API_KEY.');
+            }
+            if (msg.includes('API_KEY_INVALID') || /api key expired/i.test(msg) || /expired/i.test(msg)) {
+                throw new Error('Google Generative API returned API_KEY_INVALID / expired. Please renew your API key in Google Cloud Console, update GEMINI_API_KEY in your .env, and restart the server.');
             }
             throw error;
         }
@@ -32,6 +36,10 @@ export const geminiService = {
             return response.text();
         } catch (error) {
             console.error('Error generating content:', error);
+            const msg = (error && (error.message || JSON.stringify(error))) || '';
+            if (msg.includes('API_KEY_INVALID') || /api key expired/i.test(msg) || /expired/i.test(msg)) {
+                throw new Error('Google Generative API returned API_KEY_INVALID / expired. Please renew your API key in Google Cloud Console, update GEMINI_API_KEY in your .env, and restart the server.');
+            }
             throw error;
         }
     },
