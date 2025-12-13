@@ -1,0 +1,30 @@
+# Node dependencies
+node_modules/
+
+# Package lock files
+package-lock.json
+yarn.lock
+
+# Environment files (keep example files tracked)
+.env
+.env.local
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+
+# Build output
+dist/
+build/
+
+# Coverage
+coverage/
+
+# Editor directories
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
